@@ -55,8 +55,9 @@
 
   [x-cloak] { display: none !important; }
 
-  /* Prevent any element from forcing horizontal scroll on narrow viewports */
-  html, body { max-width: 100%; overflow-x: hidden; }
+  /* Prevent horizontal overflow on narrow viewports without breaking
+     position:sticky (overflow-x on html/body breaks sticky headers). */
+  img, svg { max-width: 100%; height: auto; }
 
   @media (max-width: 640px){
     .divider{ flex-wrap: wrap; row-gap: 6px; }
@@ -106,9 +107,10 @@
       <a href="#contact" class="hover:text-ink transition">Contact</a>
     </nav>
 
-    <button @click="mobileMenu = !mobileMenu" class="md:hidden text-ink text-sm px-2 py-2 -mr-2">
-      <span x-show="!mobileMenu">Menu</span>
-      <span x-show="mobileMenu" x-cloak>Close</span>
+    <button @click="mobileMenu = !mobileMenu" aria-label="Toggle menu" aria-expanded="false" :aria-expanded="mobileMenu.toString()" class="md:hidden relative w-8 h-8 flex flex-col items-center justify-center gap-[5px] -mr-1">
+      <span class="block h-[1.5px] w-5 bg-ink transition-all duration-300" :class="mobileMenu ? 'rotate-45 translate-y-[6.5px]' : ''"></span>
+      <span class="block h-[1.5px] w-5 bg-ink transition-all duration-300" :class="mobileMenu ? 'opacity-0' : 'opacity-100'"></span>
+      <span class="block h-[1.5px] w-5 bg-ink transition-all duration-300" :class="mobileMenu ? '-rotate-45 -translate-y-[6.5px]' : ''"></span>
     </button>
   </div>
 
@@ -174,64 +176,83 @@
     <h2 class="font-serif text-2xl font-normal text-ink whitespace-nowrap">Professional Experience</h2>
   </div>
 
-  <div class="space-y-4">
+  <div class="relative pl-7 sm:pl-9">
+    <div class="absolute left-[3px] sm:left-[5px] top-2 bottom-2 w-px bg-line"></div>
 
-    <div class="card p-6 sm:p-7">
-      <span class="text-[11px] tracking-wide uppercase text-muted">Feb 2024 &ndash; Present</span>
-      <h3 class="text-lg font-serif font-medium text-ink mt-1">Project Technical Assistant III <span class="text-muted text-sm font-sans font-normal">(Full time)</span></h3>
-      <p class="text-sm text-muted mb-3">Institute of Human Genetics, National Institutes of Health, UP Manila</p>
-      <ul class="space-y-2 text-sm text-ink/80">
-        <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Serves as research associate estimating genetic prevalence of X-Linked Dystonia-Parkinsonism (XDP) using randomly selected bio-banked de-identified residual dried blood spots (rDBS) from the Philippine Newborn Screening Program.</span></li>
-        <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Conducts DNA analysis and qPCR assays to determine genetic prevalence of the causative gene.</span></li>
-      </ul>
+    <div class="relative space-y-4">
+      <span class="absolute -left-7 sm:-left-9 top-6 w-[7px] h-[7px] rounded-full bg-ink ring-4 ring-white"></span>
+      <div class="card p-6 sm:p-7">
+        <span class="text-[11px] tracking-wide uppercase text-muted">Feb 2024 &ndash; Present</span>
+        <h3 class="text-lg font-serif font-medium text-ink mt-1">Project Technical Assistant III <span class="text-muted text-sm font-sans font-normal">(Full time)</span></h3>
+        <p class="text-sm text-muted mb-3">Institute of Human Genetics, National Institutes of Health, UP Manila</p>
+        <ul class="space-y-2 text-sm text-ink/80">
+          <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Serves as research associate estimating genetic prevalence of X-Linked Dystonia-Parkinsonism (XDP) using randomly selected bio-banked de-identified residual dried blood spots (rDBS) from the Philippine Newborn Screening Program.</span></li>
+          <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Conducts DNA analysis and qPCR assays to determine genetic prevalence of the causative gene.</span></li>
+        </ul>
+      </div>
     </div>
 
-    <div class="card p-6 sm:p-7">
-      <span class="text-[11px] tracking-wide uppercase text-muted">Jan &ndash; Feb 2024</span>
-      <h3 class="text-lg font-serif font-medium text-ink mt-1">Laboratory Observer / Intern <span class="text-muted text-sm font-sans font-normal">(Part time)</span></h3>
-      <p class="text-sm text-muted mb-3">Department of Medical Microbiology, College of Public Health, UP Manila</p>
-      <ul class="space-y-2 text-sm text-ink/80">
-        <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Acquired proficiency in molecular laboratory techniques while observing ongoing projects in the Virology laboratory.</span></li>
-        <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Demonstrated keen attention to detail while assessing laboratory diagnostics.</span></li>
-      </ul>
+    <div class="relative space-y-4 mt-4">
+      <span class="absolute -left-7 sm:-left-9 top-6 w-[7px] h-[7px] rounded-full bg-ink ring-4 ring-white"></span>
+      <div class="card p-6 sm:p-7">
+        <span class="text-[11px] tracking-wide uppercase text-muted">Jan &ndash; Feb 2024</span>
+        <h3 class="text-lg font-serif font-medium text-ink mt-1">Laboratory Observer / Intern <span class="text-muted text-sm font-sans font-normal">(Part time)</span></h3>
+        <p class="text-sm text-muted mb-3">Department of Medical Microbiology, College of Public Health, UP Manila</p>
+        <ul class="space-y-2 text-sm text-ink/80">
+          <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Acquired proficiency in molecular laboratory techniques while observing ongoing projects in the Virology laboratory.</span></li>
+          <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Demonstrated keen attention to detail while assessing laboratory diagnostics.</span></li>
+        </ul>
+      </div>
     </div>
 
-    <div class="card p-6 sm:p-7">
-      <span class="text-[11px] tracking-wide uppercase text-muted">Sep 2023 &ndash; Feb 2024</span>
-      <h3 class="text-lg font-serif font-medium text-ink mt-1">University Research Associate <span class="text-muted text-sm font-sans font-normal">(Full time)</span></h3>
-      <p class="text-sm text-muted mb-3">Foundations for Clinical Epidemiology Program, UP Manila</p>
-      <ul class="space-y-2 text-sm text-ink/80">
-        <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Coordinated with UP Manila &amp; Diliman leads for &ldquo;Systematic Review and Meta-analysis of Clinical Evidence for Prioritized HTA Topics&rdquo;, commissioned by DOH &amp; DOST.</span></li>
-        <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Executed database search, article screening, full-text analysis, quality assessment, and statistical analyses for scientific documentation.</span></li>
-        <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Supervised project assistants and communicated with medical stakeholders for national expert consultations.</span></li>
-      </ul>
+    <div class="relative space-y-4 mt-4">
+      <span class="absolute -left-7 sm:-left-9 top-6 w-[7px] h-[7px] rounded-full bg-ink ring-4 ring-white"></span>
+      <div class="card p-6 sm:p-7">
+        <span class="text-[11px] tracking-wide uppercase text-muted">Sep 2023 &ndash; Feb 2024</span>
+        <h3 class="text-lg font-serif font-medium text-ink mt-1">University Research Associate <span class="text-muted text-sm font-sans font-normal">(Full time)</span></h3>
+        <p class="text-sm text-muted mb-3">Foundations for Clinical Epidemiology Program, UP Manila</p>
+        <ul class="space-y-2 text-sm text-ink/80">
+          <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Coordinated with UP Manila &amp; Diliman leads for &ldquo;Systematic Review and Meta-analysis of Clinical Evidence for Prioritized HTA Topics&rdquo;, commissioned by DOH &amp; DOST.</span></li>
+          <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Executed database search, article screening, full-text analysis, quality assessment, and statistical analyses for scientific documentation.</span></li>
+          <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Supervised project assistants and communicated with medical stakeholders for national expert consultations.</span></li>
+        </ul>
+      </div>
     </div>
 
-    <div class="card p-6 sm:p-7">
-      <span class="text-[11px] tracking-wide uppercase text-muted">Feb &ndash; Jul 2023</span>
-      <h3 class="text-lg font-serif font-medium text-ink mt-1">Research Assistant <span class="text-muted text-sm font-sans font-normal">(Part time)</span></h3>
-      <p class="text-sm text-muted mb-3">UP Baguio, College of Science Research Centre (SRC), Baguio City</p>
-      <ul class="space-y-2 text-sm text-ink/80">
-        <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Co-authored a peer-reviewed research article in a Scopus-indexed journal; organized diagnostic science trainings with external partners.</span></li>
-      </ul>
+    <div class="relative space-y-4 mt-4">
+      <span class="absolute -left-7 sm:-left-9 top-6 w-[7px] h-[7px] rounded-full bg-ink ring-4 ring-white"></span>
+      <div class="card p-6 sm:p-7">
+        <span class="text-[11px] tracking-wide uppercase text-muted">Feb &ndash; Jul 2023</span>
+        <h3 class="text-lg font-serif font-medium text-ink mt-1">Research Assistant <span class="text-muted text-sm font-sans font-normal">(Part time)</span></h3>
+        <p class="text-sm text-muted mb-3">UP Baguio, College of Science Research Centre (SRC), Baguio City</p>
+        <ul class="space-y-2 text-sm text-ink/80">
+          <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Co-authored a peer-reviewed research article in a Scopus-indexed journal; organized diagnostic science trainings with external partners.</span></li>
+        </ul>
+      </div>
     </div>
 
-    <div class="card p-6 sm:p-7">
-      <span class="text-[11px] tracking-wide uppercase text-muted">Sep 2022 &ndash; Feb 2023</span>
-      <h3 class="text-lg font-serif font-medium text-ink mt-1">Student Assistant <span class="text-muted text-sm font-sans font-normal">(Part time)</span></h3>
-      <p class="text-sm text-muted mb-3">UP Baguio, Office of the College Secretary (OCS)</p>
-      <ul class="space-y-2 text-sm text-ink/80">
-        <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Executed document routing, managed student forms, and addressed administrative client queries.</span></li>
-      </ul>
+    <div class="relative space-y-4 mt-4">
+      <span class="absolute -left-7 sm:-left-9 top-6 w-[7px] h-[7px] rounded-full bg-ink ring-4 ring-white"></span>
+      <div class="card p-6 sm:p-7">
+        <span class="text-[11px] tracking-wide uppercase text-muted">Sep 2022 &ndash; Feb 2023</span>
+        <h3 class="text-lg font-serif font-medium text-ink mt-1">Student Assistant <span class="text-muted text-sm font-sans font-normal">(Part time)</span></h3>
+        <p class="text-sm text-muted mb-3">UP Baguio, Office of the College Secretary (OCS)</p>
+        <ul class="space-y-2 text-sm text-ink/80">
+          <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Executed document routing, managed student forms, and addressed administrative client queries.</span></li>
+        </ul>
+      </div>
     </div>
 
-    <div class="card p-6 sm:p-7">
-      <span class="text-[11px] tracking-wide uppercase text-muted">Sep &ndash; Oct 2018</span>
-      <h3 class="text-lg font-serif font-medium text-ink mt-1">Research Lab Intern <span class="text-muted text-sm font-sans font-normal">(Full time)</span></h3>
-      <p class="text-sm text-muted mb-3">DA Region 02 &ndash; Cagayan Valley Integrated Agricultural Laboratory (CVIAL)</p>
-      <ul class="space-y-2 text-sm text-ink/80">
-        <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Assisted in qualitative ELISA serological assays for corn maize against aflatoxin; conducted soil pH, organic carbon, and trace element titrations.</span></li>
-      </ul>
+    <div class="relative space-y-4 mt-4">
+      <span class="absolute -left-7 sm:-left-9 top-6 w-[7px] h-[7px] rounded-full bg-ink ring-4 ring-white"></span>
+      <div class="card p-6 sm:p-7">
+        <span class="text-[11px] tracking-wide uppercase text-muted">Sep &ndash; Oct 2018</span>
+        <h3 class="text-lg font-serif font-medium text-ink mt-1">Research Lab Intern <span class="text-muted text-sm font-sans font-normal">(Full time)</span></h3>
+        <p class="text-sm text-muted mb-3">DA Region 02 &ndash; Cagayan Valley Integrated Agricultural Laboratory (CVIAL)</p>
+        <ul class="space-y-2 text-sm text-ink/80">
+          <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Assisted in qualitative ELISA serological assays for corn maize against aflatoxin; conducted soil pH, organic carbon, and trace element titrations.</span></li>
+        </ul>
+      </div>
     </div>
   </div>
 
