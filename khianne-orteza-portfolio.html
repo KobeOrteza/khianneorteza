@@ -3,33 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Khianne Ed Miguel P. Orteza | Bioengineering Portfolio</title>
+<title>Khianne Ed Miguel P. Orteza | Portfolio</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <script>
   tailwind.config = {
     theme: {
       extend: {
         fontFamily: {
-          serif: ['Fraunces', 'serif'],
-          sans: ['IBM Plex Sans', 'sans-serif'],
-          mono: ['IBM Plex Mono', 'monospace'],
+          serif: ['Newsreader', 'serif'],
+          sans: ['Inter', 'sans-serif'],
         },
         colors: {
-          paper: '#F1EAD9',
-          paperDeep: '#E7DEC7',
-          ink: '#211D18',
-          violet: { DEFAULT: '#5B3A8E', 50: '#F1ECF7', 500: '#5B3A8E', 700: '#432A6B' },
-          safranin: { DEFAULT: '#B8402F', 50: '#FBEEEB', 500: '#B8402F', 700: '#8C2F22' },
-          amber: { DEFAULT: '#B9821B', 50: '#FBF2E0', 500: '#B9821B' },
-          sage: { DEFAULT: '#6E7C60', 50: '#EEF1EA', 500: '#6E7C60' },
+          ink: '#171717',
+          muted: '#767676',
+          line: 'rgba(23,23,23,0.10)',
         }
       }
     }
@@ -38,378 +32,227 @@
 
 <style>
   html { -webkit-font-smoothing: antialiased; }
-  body {
-    background-color: #F1EAD9;
-    background-image:
-      repeating-linear-gradient(to bottom, transparent 0px, transparent 34px, rgba(33,29,24,0.055) 35px),
-      radial-gradient(ellipse at top left, rgba(184,64,47,0.05), transparent 55%),
-      radial-gradient(ellipse at bottom right, rgba(91,58,142,0.05), transparent 55%);
+  body { background:#ffffff; }
+
+  .card{
+    background: rgba(23,23,23,0.015);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(23,23,23,0.09);
+    transition: border-color .3s, background .3s;
   }
-  .paper-grain {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  .card:hover{
+    border-color: rgba(23,23,23,0.22);
+    background: rgba(23,23,23,0.03);
   }
 
-  /* Specimen index card */
-  .spec-card {
-    background: #FBF6EA;
-    border: 1px solid rgba(33,29,24,0.14);
-    box-shadow: 0 1px 0 rgba(33,29,24,0.05), 0 10px 24px -18px rgba(33,29,24,0.4);
-    transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1), border-color .35s;
-    position: relative;
-  }
-  .spec-card:hover {
-    transform: translateY(-3px) rotate(-0.35deg);
-    border-color: rgba(184,64,47,0.35);
-    box-shadow: 0 1px 0 rgba(33,29,24,0.05), 0 20px 34px -18px rgba(33,29,24,0.35);
-  }
-  /* torn label tab */
-  .spec-tab {
-    position: absolute; top: -11px; left: 22px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px; letter-spacing: .06em;
-    padding: 3px 10px 4px;
-    background: #211D18; color: #F1EAD9;
-    clip-path: polygon(0% 0%, 100% 0%, 96% 100%, 4% 100%);
-  }
+  .divider{ display:flex; align-items:center; gap:16px; }
+  .divider .rail{ flex:1; height:1px; background: var(--line, rgba(23,23,23,0.10)); }
 
-  /* Gel lane divider */
-  .lane-divider { display:flex; align-items:center; gap:14px; }
-  .lane-divider .rail { flex:1; height:1px; background: repeating-linear-gradient(to right, rgba(33,29,24,0.35) 0 6px, transparent 6px 11px); }
-
-  /* Petri dish */
-  .petri {
-    width: 128px; height: 128px; border-radius: 9999px;
-    border: 2.5px dashed rgba(33,29,24,0.28);
-    position: relative; flex-shrink: 0;
-    background: radial-gradient(circle at 30% 28%, var(--c1) 0%, var(--c1) 18%, transparent 45%),
-                radial-gradient(circle at 65% 60%, var(--c2) 0%, var(--c2) 10%, transparent 38%),
-                radial-gradient(circle at 55% 30%, var(--c2) 0%, transparent 30%),
-                #FBF6EA;
-  }
-  .petri::after {
-    content:''; position:absolute; inset: 8px; border-radius: 9999px;
-    border: 1px solid rgba(33,29,24,0.15);
-  }
-
-  .slide-label { font-family: 'IBM Plex Mono', monospace; }
-
-  ::-webkit-scrollbar { width: 9px; }
-  ::-webkit-scrollbar-track { background: #E7DEC7; }
-  ::-webkit-scrollbar-thumb { background: #B8402F; border-radius: 5px; }
-  ::-webkit-scrollbar-thumb:hover { background: #8C2F22; }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #fff; }
+  ::-webkit-scrollbar-thumb { background: rgba(23,23,23,0.18); border-radius: 5px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(23,23,23,0.32); }
 
   [x-cloak] { display: none !important; }
-
-  /* ---------- Scroll progress lane ---------- */
-  #gel-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 60; background: rgba(33,29,24,0.08); }
-  #gel-progress .band {
-    height: 100%; width: 0%;
-    background: linear-gradient(to right, #5B3A8E, #B8402F);
-    transition: width .08s linear;
-  }
-
-  /* ---------- Reveal-on-scroll ---------- */
-  .reveal {
-    opacity: 0;
-    transform: translateY(22px);
-    transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
-  }
-  .reveal.is-visible { opacity: 1; transform: translateY(0); }
-  .reveal-group > * {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
-  }
-  .reveal-group.is-visible > *:nth-child(1) { transition-delay: .02s; }
-  .reveal-group.is-visible > *:nth-child(2) { transition-delay: .09s; }
-  .reveal-group.is-visible > *:nth-child(3) { transition-delay: .16s; }
-  .reveal-group.is-visible > *:nth-child(4) { transition-delay: .23s; }
-  .reveal-group.is-visible > *:nth-child(5) { transition-delay: .30s; }
-  .reveal-group.is-visible > *:nth-child(6) { transition-delay: .37s; }
-  .reveal-group.is-visible > * { opacity: 1; transform: translateY(0); }
-
-  /* ---------- Hero entrance ---------- */
-  @keyframes riseIn { from { opacity:0; transform: translateY(26px);} to { opacity:1; transform: translateY(0);} }
-  @keyframes slideDrop { from { opacity:0; transform: translateY(-16px) rotate(-2deg);} to { opacity:1; transform: translateY(0) rotate(0deg);} }
-  .hero-slide { animation: slideDrop .8s cubic-bezier(.16,1,.3,1) both; animation-delay: .1s; }
-  .hero-item { animation: riseIn .75s cubic-bezier(.16,1,.3,1) both; }
-  .hero-item:nth-child(1) { animation-delay: .28s; }
-  .hero-item:nth-child(2) { animation-delay: .38s; }
-  .hero-item:nth-child(3) { animation-delay: .48s; }
-  .hero-item:nth-child(4) { animation-delay: .58s; }
-  .hero-item:nth-child(5) { animation-delay: .68s; }
-
-  /* ---------- Nav underline ---------- */
-  .nav-link { position: relative; }
-  .nav-link::after {
-    content: ''; position: absolute; left: 0; bottom: -4px; width: 100%; height: 1px;
-    background: #B8402F; transform: scaleX(0); transform-origin: left;
-    transition: transform .35s cubic-bezier(.16,1,.3,1);
-  }
-  .nav-link:hover::after { transform: scaleX(1); }
-
-  /* ---------- Card tilt ---------- */
-  .spec-card, .petri-wrap { transform-style: preserve-3d; will-change: transform; }
-
-  /* ---------- Petri ambient motion ---------- */
-  @keyframes petriDrift {
-    0%, 100% { background-position: 30% 28%, 65% 60%, 55% 30%, 0 0; }
-    50% { background-position: 33% 25%, 62% 63%, 52% 33%, 0 0; }
-  }
-  .petri { animation: petriDrift 7s ease-in-out infinite; }
-  .petri::before {
-    content:''; position:absolute; inset:0; border-radius: 9999px;
-    box-shadow: inset 0 0 0 0 rgba(184,64,47,0.35);
-    animation: petriPulse 3.4s ease-in-out infinite;
-  }
-  @keyframes petriPulse {
-    0%, 100% { box-shadow: inset 0 0 0 0 rgba(184,64,47,0.25); }
-    50% { box-shadow: inset 0 0 14px 0 rgba(184,64,47,0.25); }
-  }
-
-  /* ---------- Header shrink ---------- */
-  header { transition: padding .35s cubic-bezier(.16,1,.3,1), box-shadow .35s; }
-  header.shrunk .max-w-6xl { padding-top: .55rem; padding-bottom: .55rem; }
-  header.shrunk { box-shadow: 0 8px 20px -14px rgba(33,29,24,0.25); }
-
-  /* ---------- DNA gentle spin ---------- */
-  @keyframes dnaSway { 0%,100% { transform: rotate(-4deg);} 50% { transform: rotate(4deg);} }
-  .dna-icon { animation: dnaSway 5s ease-in-out infinite; transform-origin: center; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .reveal, .reveal-group > *, .hero-slide, .hero-item, .petri, .petri::before, .dna-icon {
-      animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important;
-    }
-  }
 </style>
 </head>
-<body class="text-ink font-sans antialiased selection:bg-safranin selection:text-paper relative overflow-x-hidden" x-data="{ mobileMenu: false }">
-
-<div class="fixed inset-0 pointer-events-none z-0 paper-grain"></div>
-
-<div id="gel-progress"><div class="band"></div></div>
+<body class="text-ink font-sans antialiased selection:bg-ink selection:text-white relative" x-data="{ mobileMenu: false }">
 
 <!-- Header -->
-<header id="site-header" class="sticky top-0 z-50 backdrop-blur-sm bg-paper/85 border-b border-ink/10">
-  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-    <a href="#" class="font-mono text-xs tracking-widest uppercase text-ink flex items-center gap-2 border border-ink/20 px-3 py-1.5 rounded-sm bg-paper">
-      <span class="w-1.5 h-1.5 rounded-full bg-safranin animate-pulse"></span> Specimen KEMO&ndash;26
-    </a>
+<header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-line">
+  <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="#" class="font-serif text-base tracking-tight text-ink">Khianne Orteza</a>
 
-    <nav class="hidden md:flex items-center gap-7 text-[11px] font-mono tracking-widest uppercase text-ink/60">
-      <a href="#about" class="nav-link hover:text-safranin transition">Profile</a>
-      <a href="#cv" class="nav-link hover:text-safranin transition">CV</a>
-      <a href="#research" class="nav-link hover:text-safranin transition">Focus&nbsp;Areas</a>
-      <a href="#takeaways" class="nav-link hover:text-safranin transition">Journal</a>
-      <a href="#volunteering" class="nav-link hover:text-safranin transition">Community</a>
+    <nav class="hidden md:flex items-center gap-8 text-[12px] tracking-wide text-muted">
+      <a href="#about" class="hover:text-ink transition">Profile</a>
+      <a href="#cv" class="hover:text-ink transition">Experience</a>
+      <a href="#research" class="hover:text-ink transition">Focus Areas</a>
+      <a href="#takeaways" class="hover:text-ink transition">Journal</a>
+      <a href="#volunteering" class="hover:text-ink transition">Community</a>
+      <a href="#contact" class="hover:text-ink transition">Contact</a>
     </nav>
 
-    <a href="mailto:khianneorteza22@gmail.com" class="hidden md:inline-block bg-ink text-paper hover:bg-safranin px-5 py-2 rounded-sm text-[11px] font-mono uppercase tracking-widest transition">
-      Contact
-    </a>
-
-    <button @click="mobileMenu = !mobileMenu" class="md:hidden text-ink">
-      <i data-lucide="menu" class="w-6 h-6" x-show="!mobileMenu"></i>
-      <i data-lucide="x" class="w-6 h-6" x-show="mobileMenu" x-cloak></i>
+    <button @click="mobileMenu = !mobileMenu" class="md:hidden text-ink text-sm">
+      <span x-show="!mobileMenu">Menu</span>
+      <span x-show="mobileMenu" x-cloak>Close</span>
     </button>
   </div>
 
-  <div x-show="mobileMenu" x-transition x-cloak class="md:hidden bg-paper border-b border-ink/15 px-6 py-6 space-y-4 text-sm font-mono uppercase tracking-widest">
-    <a href="#about" @click="mobileMenu=false" class="block text-ink/70 hover:text-safranin">Profile</a>
-    <a href="#cv" @click="mobileMenu=false" class="block text-ink/70 hover:text-safranin">CV</a>
-    <a href="#research" @click="mobileMenu=false" class="block text-ink/70 hover:text-safranin">Focus Areas</a>
-    <a href="#takeaways" @click="mobileMenu=false" class="block text-ink/70 hover:text-safranin">Journal</a>
-    <a href="#volunteering" @click="mobileMenu=false" class="block text-ink/70 hover:text-safranin">Community</a>
+  <div x-show="mobileMenu" x-transition x-cloak class="md:hidden bg-white border-b border-line px-6 py-6 space-y-4 text-sm">
+    <a href="#about" @click="mobileMenu=false" class="block text-muted hover:text-ink">Profile</a>
+    <a href="#cv" @click="mobileMenu=false" class="block text-muted hover:text-ink">Experience</a>
+    <a href="#research" @click="mobileMenu=false" class="block text-muted hover:text-ink">Focus Areas</a>
+    <a href="#takeaways" @click="mobileMenu=false" class="block text-muted hover:text-ink">Journal</a>
+    <a href="#volunteering" @click="mobileMenu=false" class="block text-muted hover:text-ink">Community</a>
+    <a href="#contact" @click="mobileMenu=false" class="block text-muted hover:text-ink">Contact</a>
   </div>
 </header>
 
-<!-- Hero: microscope slide -->
-<section id="about" class="max-w-6xl mx-auto px-6 pt-16 pb-14 relative z-10">
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+<!-- Hero -->
+<section id="about" class="max-w-5xl mx-auto px-6 pt-20 pb-16">
+  <div class="divider mb-6">
+    <span class="text-[11px] tracking-[0.2em] uppercase text-muted whitespace-nowrap">Profile</span>
+    <div class="rail"></div>
+  </div>
 
-    <!-- Slide visual -->
-    <div class="lg:col-span-4 flex justify-center">
-      <div class="relative hero-slide">
-        <div class="w-60 h-72 bg-[#FBF6EA] border border-ink/15 shadow-[0_18px_40px_-20px_rgba(33,29,24,0.5)] relative overflow-hidden">
-          <!-- crosshair reticle -->
-          <div class="absolute inset-0 flex items-center justify-center">
-            <div class="w-44 h-44 rounded-full border border-safranin/40 relative flex items-center justify-center">
-              <div class="absolute w-full h-px bg-safranin/30"></div>
-              <div class="absolute h-full w-px bg-safranin/30"></div>
-              <i data-lucide="dna" class="w-14 h-14 text-violet stroke-[1.1] dna-icon"></i>
-            </div>
-          </div>
-          <!-- tick marks like a slide ruler -->
-          <div class="absolute left-0 top-0 bottom-0 w-4 flex flex-col justify-between py-4">
-            <template x-for="i in 8"><div class="h-px bg-ink/20 w-2"></div></template>
-          </div>
-          <!-- taped label at bottom -->
-          <div class="absolute bottom-0 inset-x-0 bg-ink text-paper slide-label text-[10px] px-3 py-2 tracking-wider">
-            <div class="flex justify-between"><span>SLIDE</span><span>KEMO&ndash;001</span></div>
-            <div class="flex justify-between text-paper/60"><span>STAIN</span><span>N/A &mdash; LIVE</span></div>
-          </div>
-        </div>
-        <div class="absolute -top-2 -right-2 w-4 h-10 bg-amber/70 rotate-12 opacity-70"></div>
+  <div class="flex flex-col sm:flex-row items-start gap-8 sm:gap-10">
+    <div class="shrink-0 mx-auto sm:mx-0">
+      <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-full border border-line bg-ink/[0.02] flex items-center justify-center overflow-hidden">
+        <!-- Replace the src below with your photo -->
+        <img src="your-photo.jpg" alt="Khianne Ed Miguel P. Orteza" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <span class="hidden w-full h-full items-center justify-center text-[10px] tracking-wide uppercase text-muted text-center px-4">Add your photo</span>
       </div>
     </div>
 
-    <!-- Content -->
-    <div class="lg:col-span-8 space-y-6">
-      <div class="lane-divider mb-2 hero-item">
-        <span class="font-mono text-[10px] tracking-[0.2em] uppercase text-safranin">Field Notes</span>
-        <div class="rail"></div>
-      </div>
-
-      <h1 class="hero-item font-serif text-5xl sm:text-6xl font-medium tracking-tight text-ink leading-[1.05]">
-        Khianne Ed Miguel<br><span class="italic text-violet">P. Orteza</span>
+    <div>
+      <h1 class="font-serif text-5xl sm:text-6xl font-normal tracking-tight text-ink leading-[1.08]">
+        Khianne Ed Miguel<br><span class="italic text-muted">P. Orteza</span>
       </h1>
 
-      <p class="hero-item text-base text-ink/70 leading-relaxed max-w-2xl font-light">
+      <p class="text-base text-muted leading-relaxed max-w-2xl font-light mt-6">
         He / Him / His &mdash; researcher working at the intersection of genetics, microbiology,
         and molecular diagnostics.
       </p>
-
-      <!-- specimen data rows -->
-      <div class="hero-item border border-ink/15 bg-[#FBF6EA]/70 divide-y divide-ink/10 max-w-xl font-mono text-xs">
-        <div class="flex px-4 py-2.5 gap-4"><span class="w-32 text-ink/45 uppercase tracking-wider">Current</span><span class="text-ink">HKUST &middot; MPhil in Bioengineering, Class of 2026</span></div>
-        <div class="flex px-4 py-2.5 gap-4"><span class="w-32 text-ink/45 uppercase tracking-wider">Origin</span><span class="text-ink">UP Diliman &middot; B.S. Biology (Microbiology), <span class="text-violet">Magna cum Laude</span>, 2023</span></div>
-        <div class="flex px-4 py-2.5 gap-4"><span class="w-32 text-ink/45 uppercase tracking-wider">Location</span><span class="text-ink">Manila, Philippines 1000</span></div>
-        <div class="flex px-4 py-2.5 gap-4"><span class="w-32 text-ink/45 uppercase tracking-wider">Contact</span><span class="text-ink">khianneorteza22@gmail.com &middot; +63 936 907 4295</span></div>
-      </div>
-
-      <div class="hero-item flex flex-wrap gap-3 pt-1">
-        <a href="mailto:khianneorteza22@gmail.com" class="flex items-center gap-2 border border-ink/20 hover:border-safranin hover:text-safranin px-4 py-2 text-xs font-mono uppercase tracking-wider transition">
-          <i data-lucide="mail" class="w-3.5 h-3.5"></i> Email
-        </a>
-        <a href="https://www.linkedin.com/in/khianne-ed-miguel" target="_blank" class="flex items-center gap-2 border border-ink/20 hover:border-safranin hover:text-safranin px-4 py-2 text-xs font-mono uppercase tracking-wider transition">
-          <i data-lucide="linkedin" class="w-3.5 h-3.5"></i> LinkedIn
-        </a>
-      </div>
     </div>
+  </div>
+
+  <div class="card mt-10 max-w-xl text-sm divide-y divide-line">
+    <div class="flex px-5 py-3 gap-4"><span class="w-28 text-muted shrink-0">Current</span><span class="text-ink">HKUST &middot; MPhil in Bioengineering, Class of 2026</span></div>
+    <div class="flex px-5 py-3 gap-4"><span class="w-28 text-muted shrink-0">Origin</span><span class="text-ink">UP Diliman &middot; B.S. Biology (Microbiology), Magna cum Laude, 2023</span></div>
+    <div class="flex px-5 py-3 gap-4"><span class="w-28 text-muted shrink-0">Location</span><span class="text-ink">Manila, Philippines 1000</span></div>
+  </div>
+
+  <div class="flex flex-wrap gap-3 pt-8">
+    <a href="mailto:khianneorteza22@gmail.com" class="border border-line hover:border-ink px-5 py-2.5 text-xs tracking-wide text-ink transition rounded-full">
+      Email
+    </a>
+    <a href="https://www.linkedin.com/in/khianne-ed-miguel" target="_blank" class="border border-line hover:border-ink px-5 py-2.5 text-xs tracking-wide text-ink transition rounded-full">
+      LinkedIn
+    </a>
   </div>
 </section>
 
 <!-- CV -->
-<section id="cv" class="max-w-6xl mx-auto px-6 py-14 relative z-10">
-  <div class="lane-divider mb-10 reveal">
-    <span class="font-mono text-[10px] tracking-[0.2em] uppercase text-safranin whitespace-nowrap">Sample Set 01</span>
+<section id="cv" class="max-w-5xl mx-auto px-6 py-16">
+  <div class="divider mb-10">
+    <span class="text-[11px] tracking-[0.2em] uppercase text-muted whitespace-nowrap">Experience</span>
     <div class="rail"></div>
-    <h2 class="font-serif text-3xl font-medium text-ink whitespace-nowrap">Professional Experience</h2>
+    <h2 class="font-serif text-2xl font-normal text-ink whitespace-nowrap">Professional Experience</h2>
   </div>
 
-  <div class="space-y-7 reveal-group">
+  <div class="space-y-4">
 
-    <div class="spec-card p-6 sm:p-8 mt-3">
-      <span class="spec-tab">FEB 2024 &ndash; PRESENT</span>
-      <h3 class="text-xl font-serif font-medium text-ink mt-2">Project Technical Assistant III <span class="text-ink/40 text-sm font-sans">(Full time)</span></h3>
-      <p class="text-sm font-medium text-violet mb-3">Institute of Human Genetics, National Institutes of Health, UP Manila</p>
-      <ul class="space-y-2 text-sm text-ink/75">
-        <li class="flex items-start gap-2"><span class="text-safranin mt-1.5">&#9656;</span><span>Serves as research associate estimating genetic prevalence of X-Linked Dystonia-Parkinsonism (XDP) using randomly selected bio-banked de-identified residual dried blood spots (rDBS) from the Philippine Newborn Screening Program.</span></li>
-        <li class="flex items-start gap-2"><span class="text-safranin mt-1.5">&#9656;</span><span>Conducts DNA analysis and qPCR assays to determine genetic prevalence of the causative gene.</span></li>
+    <div class="card p-6 sm:p-7">
+      <span class="text-[11px] tracking-wide uppercase text-muted">Feb 2024 &ndash; Present</span>
+      <h3 class="text-lg font-serif font-medium text-ink mt-1">Project Technical Assistant III <span class="text-muted text-sm font-sans font-normal">(Full time)</span></h3>
+      <p class="text-sm text-muted mb-3">Institute of Human Genetics, National Institutes of Health, UP Manila</p>
+      <ul class="space-y-2 text-sm text-ink/80">
+        <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Serves as research associate estimating genetic prevalence of X-Linked Dystonia-Parkinsonism (XDP) using randomly selected bio-banked de-identified residual dried blood spots (rDBS) from the Philippine Newborn Screening Program.</span></li>
+        <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Conducts DNA analysis and qPCR assays to determine genetic prevalence of the causative gene.</span></li>
       </ul>
     </div>
 
-    <div class="spec-card p-6 sm:p-8 mt-3">
-      <span class="spec-tab">JAN &ndash; FEB 2024</span>
-      <h3 class="text-xl font-serif font-medium text-ink mt-2">Laboratory Observer / Intern <span class="text-ink/40 text-sm font-sans">(Part time)</span></h3>
-      <p class="text-sm font-medium text-violet mb-3">Department of Medical Microbiology, College of Public Health, UP Manila</p>
-      <ul class="space-y-2 text-sm text-ink/75">
-        <li class="flex items-start gap-2"><span class="text-safranin mt-1.5">&#9656;</span><span>Acquired proficiency in molecular laboratory techniques while observing ongoing projects in the Virology laboratory.</span></li>
-        <li class="flex items-start gap-2"><span class="text-safranin mt-1.5">&#9656;</span><span>Demonstrated keen attention to detail while assessing laboratory diagnostics.</span></li>
+    <div class="card p-6 sm:p-7">
+      <span class="text-[11px] tracking-wide uppercase text-muted">Jan &ndash; Feb 2024</span>
+      <h3 class="text-lg font-serif font-medium text-ink mt-1">Laboratory Observer / Intern <span class="text-muted text-sm font-sans font-normal">(Part time)</span></h3>
+      <p class="text-sm text-muted mb-3">Department of Medical Microbiology, College of Public Health, UP Manila</p>
+      <ul class="space-y-2 text-sm text-ink/80">
+        <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Acquired proficiency in molecular laboratory techniques while observing ongoing projects in the Virology laboratory.</span></li>
+        <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Demonstrated keen attention to detail while assessing laboratory diagnostics.</span></li>
       </ul>
     </div>
 
-    <div class="spec-card p-6 sm:p-8 mt-3">
-      <span class="spec-tab">SEP 2023 &ndash; FEB 2024</span>
-      <h3 class="text-xl font-serif font-medium text-ink mt-2">University Research Associate <span class="text-ink/40 text-sm font-sans">(Full time)</span></h3>
-      <p class="text-sm font-medium text-violet mb-3">Foundations for Clinical Epidemiology Program, UP Manila</p>
-      <ul class="space-y-2 text-sm text-ink/75">
-        <li class="flex items-start gap-2"><span class="text-safranin mt-1.5">&#9656;</span><span>Coordinated with UP Manila &amp; Diliman leads for &ldquo;Systematic Review and Meta-analysis of Clinical Evidence for Prioritized HTA Topics&rdquo;, commissioned by DOH &amp; DOST.</span></li>
-        <li class="flex items-start gap-2"><span class="text-safranin mt-1.5">&#9656;</span><span>Executed database search, article screening, full-text analysis, quality assessment, and statistical analyses for scientific documentation.</span></li>
-        <li class="flex items-start gap-2"><span class="text-safranin mt-1.5">&#9656;</span><span>Supervised project assistants and communicated with medical stakeholders for national expert consultations.</span></li>
+    <div class="card p-6 sm:p-7">
+      <span class="text-[11px] tracking-wide uppercase text-muted">Sep 2023 &ndash; Feb 2024</span>
+      <h3 class="text-lg font-serif font-medium text-ink mt-1">University Research Associate <span class="text-muted text-sm font-sans font-normal">(Full time)</span></h3>
+      <p class="text-sm text-muted mb-3">Foundations for Clinical Epidemiology Program, UP Manila</p>
+      <ul class="space-y-2 text-sm text-ink/80">
+        <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Coordinated with UP Manila &amp; Diliman leads for &ldquo;Systematic Review and Meta-analysis of Clinical Evidence for Prioritized HTA Topics&rdquo;, commissioned by DOH &amp; DOST.</span></li>
+        <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Executed database search, article screening, full-text analysis, quality assessment, and statistical analyses for scientific documentation.</span></li>
+        <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Supervised project assistants and communicated with medical stakeholders for national expert consultations.</span></li>
       </ul>
     </div>
 
-    <div class="spec-card p-6 sm:p-8 mt-3">
-      <span class="spec-tab">FEB &ndash; JUL 2023</span>
-      <h3 class="text-xl font-serif font-medium text-ink mt-2">Research Assistant <span class="text-ink/40 text-sm font-sans">(Part time)</span></h3>
-      <p class="text-sm font-medium text-violet mb-3">UP Baguio, College of Science Research Centre (SRC), Baguio City</p>
-      <ul class="space-y-2 text-sm text-ink/75">
-        <li class="flex items-start gap-2"><span class="text-safranin mt-1.5">&#9656;</span><span>Co-authored a peer-reviewed research article in a Scopus-indexed journal; organized diagnostic science trainings with external partners.</span></li>
+    <div class="card p-6 sm:p-7">
+      <span class="text-[11px] tracking-wide uppercase text-muted">Feb &ndash; Jul 2023</span>
+      <h3 class="text-lg font-serif font-medium text-ink mt-1">Research Assistant <span class="text-muted text-sm font-sans font-normal">(Part time)</span></h3>
+      <p class="text-sm text-muted mb-3">UP Baguio, College of Science Research Centre (SRC), Baguio City</p>
+      <ul class="space-y-2 text-sm text-ink/80">
+        <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Co-authored a peer-reviewed research article in a Scopus-indexed journal; organized diagnostic science trainings with external partners.</span></li>
       </ul>
     </div>
 
-    <div class="spec-card p-6 sm:p-8 mt-3">
-      <span class="spec-tab">SEP 2022 &ndash; FEB 2023</span>
-      <h3 class="text-xl font-serif font-medium text-ink mt-2">Student Assistant <span class="text-ink/40 text-sm font-sans">(Part time)</span></h3>
-      <p class="text-sm font-medium text-violet mb-3">UP Baguio, Office of the College Secretary (OCS)</p>
-      <ul class="space-y-2 text-sm text-ink/75">
-        <li class="flex items-start gap-2"><span class="text-safranin mt-1.5">&#9656;</span><span>Executed document routing, managed student forms, and addressed administrative client queries.</span></li>
+    <div class="card p-6 sm:p-7">
+      <span class="text-[11px] tracking-wide uppercase text-muted">Sep 2022 &ndash; Feb 2023</span>
+      <h3 class="text-lg font-serif font-medium text-ink mt-1">Student Assistant <span class="text-muted text-sm font-sans font-normal">(Part time)</span></h3>
+      <p class="text-sm text-muted mb-3">UP Baguio, Office of the College Secretary (OCS)</p>
+      <ul class="space-y-2 text-sm text-ink/80">
+        <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Executed document routing, managed student forms, and addressed administrative client queries.</span></li>
       </ul>
     </div>
 
-    <div class="spec-card p-6 sm:p-8 mt-3">
-      <span class="spec-tab">SEP &ndash; OCT 2018</span>
-      <h3 class="text-xl font-serif font-medium text-ink mt-2">Research Lab Intern <span class="text-ink/40 text-sm font-sans">(Full time)</span></h3>
-      <p class="text-sm font-medium text-violet mb-3">DA Region 02 &ndash; Cagayan Valley Integrated Agricultural Laboratory (CVIAL)</p>
-      <ul class="space-y-2 text-sm text-ink/75">
-        <li class="flex items-start gap-2"><span class="text-safranin mt-1.5">&#9656;</span><span>Assisted in qualitative ELISA serological assays for corn maize against aflatoxin; conducted soil pH, organic carbon, and trace element titrations.</span></li>
+    <div class="card p-6 sm:p-7">
+      <span class="text-[11px] tracking-wide uppercase text-muted">Sep &ndash; Oct 2018</span>
+      <h3 class="text-lg font-serif font-medium text-ink mt-1">Research Lab Intern <span class="text-muted text-sm font-sans font-normal">(Full time)</span></h3>
+      <p class="text-sm text-muted mb-3">DA Region 02 &ndash; Cagayan Valley Integrated Agricultural Laboratory (CVIAL)</p>
+      <ul class="space-y-2 text-sm text-ink/80">
+        <li class="flex items-start gap-2"><span class="text-muted mt-1.5">&middot;</span><span>Assisted in qualitative ELISA serological assays for corn maize against aflatoxin; conducted soil pH, organic carbon, and trace element titrations.</span></li>
       </ul>
     </div>
   </div>
 
   <!-- Publications / Awards -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-16 reveal">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-16">
 
-    <div class="space-y-5">
-      <div class="lane-divider mb-4">
+    <div class="space-y-4">
+      <div class="divider mb-4">
         <h3 class="font-serif text-xl font-medium text-ink whitespace-nowrap">Research &amp; Publications</h3>
         <div class="rail"></div>
       </div>
 
-      <div class="spec-card p-5 mt-3">
-        <span class="spec-tab bg-violet">PUBLISHED</span>
-        <p class="text-xs text-ink/75 leading-relaxed mt-2">
+      <div class="card p-5">
+        <span class="text-[11px] tracking-wide uppercase text-muted">Published</span>
+        <p class="text-xs text-ink/80 leading-relaxed mt-2">
           Tan-Lim CSC, Sajo MEJV, <strong>Orteza KEMP</strong>, Fernandez PBA, Vila MJC. Next-Gen biotherapeutics: A systematic review and network meta-analysis on postbiotics as treatment for pediatric atopic dermatitis. <em>Pediatr Allergy Immunol.</em> 2023; 34:e14022.
         </p>
       </div>
 
-      <div class="spec-card p-5 mt-3">
-        <span class="spec-tab bg-amber">IN PREP</span>
-        <p class="text-xs text-ink/75 leading-relaxed mt-2">
+      <div class="card p-5">
+        <span class="text-[11px] tracking-wide uppercase text-muted">In Preparation</span>
+        <p class="text-xs text-ink/80 leading-relaxed mt-2">
           Tantengco AEG, <strong>Orteza KEMP</strong>, Mosqueda MEG. A review on bacterial extracellular vesicles in autoimmune diseases. <em>Extracellular Vesicles and Circulating Nucleic Acids.</em> 2024.
         </p>
       </div>
 
-      <div class="spec-card p-5 mt-3">
-        <span class="spec-tab">2023&ndash;24</span>
-        <h4 class="text-xs font-bold text-ink mt-2 mb-2 uppercase tracking-wide">NIH / UP Manila HTA Systematic Reviews</h4>
+      <div class="card p-5">
+        <span class="text-[11px] tracking-wide uppercase text-muted">2023&ndash;24</span>
+        <h4 class="text-xs font-medium text-ink mt-2 mb-2 uppercase tracking-wide">NIH / UP Manila HTA Systematic Reviews</h4>
         <ul class="text-xs text-ink/70 space-y-1.5">
-          <li class="flex gap-2"><span class="text-violet">&middot;</span>Role of Bacterial Extracellular Vesicles on Lupus</li>
-          <li class="flex gap-2"><span class="text-violet">&middot;</span>Role of Ticagrelor in Treatment of Acute Coronary Syndrome</li>
-          <li class="flex gap-2"><span class="text-violet">&middot;</span>Ticagrelor for Prevention of Thrombotic Events in Post-MI Patients</li>
-          <li class="flex gap-2"><span class="text-violet">&middot;</span>Role of Reteplase in Acute Myocardial Infarction</li>
-          <li class="flex gap-2"><span class="text-violet">&middot;</span>Nilotinib vs. Imatinib for Philadelphia-Positive CML in Chronic Phase</li>
-          <li class="flex gap-2"><span class="text-violet">&middot;</span>Diagnostic Kits for High-Risk Cervical Human Papillomavirus</li>
+          <li class="flex gap-2"><span class="text-muted">&middot;</span>Role of Bacterial Extracellular Vesicles on Lupus</li>
+          <li class="flex gap-2"><span class="text-muted">&middot;</span>Role of Ticagrelor in Treatment of Acute Coronary Syndrome</li>
+          <li class="flex gap-2"><span class="text-muted">&middot;</span>Ticagrelor for Prevention of Thrombotic Events in Post-MI Patients</li>
+          <li class="flex gap-2"><span class="text-muted">&middot;</span>Role of Reteplase in Acute Myocardial Infarction</li>
+          <li class="flex gap-2"><span class="text-muted">&middot;</span>Nilotinib vs. Imatinib for Philadelphia-Positive CML in Chronic Phase</li>
+          <li class="flex gap-2"><span class="text-muted">&middot;</span>Diagnostic Kits for High-Risk Cervical Human Papillomavirus</li>
         </ul>
       </div>
     </div>
 
-    <div class="space-y-5">
-      <div class="lane-divider mb-4">
+    <div class="space-y-4">
+      <div class="divider mb-4">
         <h3 class="font-serif text-xl font-medium text-ink whitespace-nowrap">Honors &amp; Training</h3>
         <div class="rail"></div>
       </div>
 
-      <div class="spec-card p-5 mt-3 space-y-3">
-        <div class="flex justify-between text-xs gap-4"><span class="font-medium text-ink">UP System International Publication Award</span><span class="font-mono text-safranin shrink-0">2023</span></div>
-        <div class="flex justify-between text-xs gap-4"><span class="font-medium text-ink">The Honor Society of Phi Kappa Phi (Member Scholar)</span><span class="font-mono text-safranin shrink-0">2022</span></div>
-        <div class="flex justify-between text-xs gap-4"><span class="font-medium text-ink">DOST-SEI JLSS-Merit Scholarship Award</span><span class="font-mono text-safranin shrink-0">2021</span></div>
-        <div class="flex justify-between text-xs gap-4"><span class="font-medium text-ink">Philippine Senate Gold Medal Award for Academic Excellence</span><span class="font-mono text-safranin shrink-0">2019</span></div>
+      <div class="card p-5 space-y-3">
+        <div class="flex justify-between text-xs gap-4"><span class="text-ink">UP System International Publication Award</span><span class="text-muted shrink-0">2023</span></div>
+        <div class="flex justify-between text-xs gap-4"><span class="text-ink">The Honor Society of Phi Kappa Phi (Member Scholar)</span><span class="text-muted shrink-0">2022</span></div>
+        <div class="flex justify-between text-xs gap-4"><span class="text-ink">DOST-SEI JLSS-Merit Scholarship Award</span><span class="text-muted shrink-0">2021</span></div>
+        <div class="flex justify-between text-xs gap-4"><span class="text-ink">Philippine Senate Gold Medal Award for Academic Excellence</span><span class="text-muted shrink-0">2019</span></div>
       </div>
 
-      <div class="spec-card p-5 mt-3 space-y-2">
-        <h4 class="text-xs font-bold text-ink uppercase tracking-wide">Workshops Conducted &amp; Trainings</h4>
+      <div class="card p-5 space-y-2">
+        <h4 class="text-xs font-medium text-ink uppercase tracking-wide">Workshops Conducted &amp; Trainings</h4>
         <p class="text-xs text-ink/70 leading-relaxed">
           <strong class="text-ink">Invited Facilitator</strong> &mdash; NRCP Bibliometrics &amp; Systematic Review Workshop (Feb 2024)<br>
           <strong class="text-ink">Invited Facilitator</strong> &mdash; MD-PhD Workshop on Systematic Review, UP Manila (Dec 2023)<br>
@@ -417,114 +260,105 @@
         </p>
       </div>
 
-      <div class="spec-card p-5 mt-3 space-y-2">
-        <h4 class="text-xs font-bold text-ink uppercase tracking-wide">Skills Matrix</h4>
-        <p class="text-xs font-mono text-ink/70 leading-relaxed">
-          <strong class="text-violet">Proficient</strong> &mdash; Science Communication, Systematic Reviews, Meta-Analysis, Infodemiology, Microbiology, Graphical Design<br>
-          <strong class="text-safranin">Intermediate</strong> &mdash; R, SPSS<br>
-          <strong class="text-amber">Beginner</strong> &mdash; STATA, Epidemiology
+      <div class="card p-5 space-y-2">
+        <h4 class="text-xs font-medium text-ink uppercase tracking-wide">Skills Matrix</h4>
+        <p class="text-xs text-ink/70 leading-relaxed">
+          <strong class="text-ink">Proficient</strong> &mdash; Science Communication, Systematic Reviews, Meta-Analysis, Infodemiology, Microbiology, Graphical Design<br>
+          <strong class="text-ink">Intermediate</strong> &mdash; R, SPSS<br>
+          <strong class="text-ink">Beginner</strong> &mdash; STATA, Epidemiology
         </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Research Focus: Petri dishes -->
-<section id="research" class="max-w-6xl mx-auto px-6 py-14 relative z-10">
-  <div class="lane-divider mb-10 reveal">
-    <span class="font-mono text-[10px] tracking-[0.2em] uppercase text-safranin whitespace-nowrap">Culture Plates</span>
+<!-- Research Focus -->
+<section id="research" class="max-w-5xl mx-auto px-6 py-16">
+  <div class="divider mb-10">
+    <span class="text-[11px] tracking-[0.2em] uppercase text-muted whitespace-nowrap">Focus Areas</span>
     <div class="rail"></div>
-    <h2 class="font-serif text-3xl font-medium text-ink whitespace-nowrap">Undergraduate Course Concentration</h2>
+    <h2 class="font-serif text-2xl font-normal text-ink whitespace-nowrap">Undergraduate Course Concentration</h2>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 reveal-group">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
 
-    <div class="flex flex-col items-center text-center gap-5">
-      <div class="petri" style="--c1:#B8402F55; --c2:#B8402F33;"></div>
-      <div class="spec-card p-5 w-full mt-2">
-        <span class="spec-tab bg-safranin">DERMAL MICROBIOME</span>
-        <h3 class="font-serif font-medium text-ink text-base mt-3">Human Skin Microbiome</h3>
-        <p class="text-xs text-ink/70 leading-relaxed mt-2">
-          Explored cosmetic regimens leveraging <em>Staphylococcus epidermidis</em> to synthesize bio-friendly skincare &mdash; countering chemical dysbiosis and building microbiome-friendly dermal health solutions.
-        </p>
-      </div>
+    <div class="card p-6">
+      <span class="text-[11px] tracking-wide uppercase text-muted">Dermal Microbiome</span>
+      <h3 class="font-serif font-medium text-ink text-base mt-3">Human Skin Microbiome</h3>
+      <p class="text-xs text-ink/70 leading-relaxed mt-2">
+        Explored cosmetic regimens leveraging <em>Staphylococcus epidermidis</em> to synthesize bio-friendly skincare &mdash; countering chemical dysbiosis and building microbiome-friendly dermal health solutions.
+      </p>
     </div>
 
-    <div class="flex flex-col items-center text-center gap-5">
-      <div class="petri" style="--c1:#B9821B55; --c2:#B9821B33;"></div>
-      <div class="spec-card p-5 w-full mt-2">
-        <span class="spec-tab bg-amber">BIOTECH &amp; UV</span>
-        <h3 class="font-serif font-medium text-ink text-base mt-3">Beneficial Microbes &amp; Innovation</h3>
-        <p class="text-xs text-ink/70 leading-relaxed mt-2">
-          Addressing anti-pathogen bias by investigating bacterial anti-UV resilience, microbial pigments, and biotech applications to mitigate environmental aging and oxidative stress.
-        </p>
-      </div>
+    <div class="card p-6">
+      <span class="text-[11px] tracking-wide uppercase text-muted">Biotech &amp; UV</span>
+      <h3 class="font-serif font-medium text-ink text-base mt-3">Beneficial Microbes &amp; Innovation</h3>
+      <p class="text-xs text-ink/70 leading-relaxed mt-2">
+        Addressing anti-pathogen bias by investigating bacterial anti-UV resilience, microbial pigments, and biotech applications to mitigate environmental aging and oxidative stress.
+      </p>
     </div>
 
-    <div class="flex flex-col items-center text-center gap-5">
-      <div class="petri" style="--c1:#6E7C6055; --c2:#5B3A8E33;"></div>
-      <div class="spec-card p-5 w-full mt-2">
-        <span class="spec-tab bg-sage">CELLULAR AGING</span>
-        <h3 class="font-serif font-medium text-ink text-base mt-3">Cell Biology &amp; Longevity</h3>
-        <p class="text-xs text-ink/70 leading-relaxed mt-2">
-          Investigating specialized cellular behavior, phytochemical effects on viability, and molecular pathways of aging &mdash; oxidative stress regulation and autoimmunity.
-        </p>
-      </div>
+    <div class="card p-6">
+      <span class="text-[11px] tracking-wide uppercase text-muted">Cellular Aging</span>
+      <h3 class="font-serif font-medium text-ink text-base mt-3">Cell Biology &amp; Longevity</h3>
+      <p class="text-xs text-ink/70 leading-relaxed mt-2">
+        Investigating specialized cellular behavior, phytochemical effects on viability, and molecular pathways of aging &mdash; oxidative stress regulation and autoimmunity.
+      </p>
     </div>
   </div>
 </section>
 
 <!-- Journal Takeaways -->
-<section id="takeaways" class="max-w-6xl mx-auto px-6 py-14 relative z-10">
-  <div class="lane-divider mb-10 reveal">
-    <span class="font-mono text-[10px] tracking-[0.2em] uppercase text-safranin whitespace-nowrap">Field Journal</span>
+<section id="takeaways" class="max-w-5xl mx-auto px-6 py-16">
+  <div class="divider mb-10">
+    <span class="text-[11px] tracking-[0.2em] uppercase text-muted whitespace-nowrap">Journal</span>
     <div class="rail"></div>
-    <h2 class="font-serif text-3xl font-medium text-ink whitespace-nowrap">Article Takeaways &amp; Essays</h2>
+    <h2 class="font-serif text-2xl font-normal text-ink whitespace-nowrap">Article Takeaways &amp; Essays</h2>
   </div>
 
-  <div class="spec-card p-8 sm:p-10 mb-8 mt-3 reveal">
-    <span class="spec-tab bg-violet">FEATURE &mdash; NOV 2023</span>
-    <span class="font-mono text-[10px] uppercase tracking-wider text-ink/40 float-right mt-2">Ethno-microbiology &amp; Synthetic Biology</span>
+  <div class="card p-8 sm:p-10 mb-6">
+    <span class="text-[11px] tracking-wide uppercase text-muted">Feature &mdash; Nov 2023</span>
+    <span class="text-[11px] uppercase tracking-wider text-muted float-right">Ethno-microbiology &amp; Synthetic Biology</span>
     <h3 class="font-serif text-2xl font-medium text-ink mt-3 clear-both">Microbial Culture in Culture: Tap&euml;y Rice Wine</h3>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-xs text-ink/75 leading-relaxed mt-6">
-      <div class="p-4 bg-paper border border-ink/10 space-y-2">
-        <strong class="text-violet text-sm block font-serif">Cultural Binding in Sagada</strong>
+      <div class="p-4 border border-line space-y-2">
+        <strong class="text-ink text-sm block font-serif font-medium">Cultural Binding in Sagada</strong>
         <p>Field observation in Sagada highlighted tap&euml;y as a social binder in Cordilleran heritage &mdash; accompanying sacred &lsquo;pit&iacute;k&rsquo; prayers and communal discussions at the dap-ay, using <em>b&uacute;bod</em> starter cultures of molds, yeasts, and lactobacilli.</p>
       </div>
-      <div class="p-4 bg-paper border border-ink/10 space-y-2">
-        <strong class="text-violet text-sm block font-serif">Standardizing Microbial Quality</strong>
+      <div class="p-4 border border-line space-y-2">
+        <strong class="text-ink text-sm block font-serif font-medium">Standardizing Microbial Quality</strong>
         <p>Studies on starter cultures like <em>Pichia kudriavzevii</em> and <em>S. cerevisiae</em> show how food microbiology can standardize indigenous Philippine products, laying groundwork for Protected Designation of Origin (PDO) status.</p>
       </div>
-      <div class="p-4 bg-paper border border-ink/10 space-y-2">
-        <strong class="text-violet text-sm block font-serif">Synthetic Yeast Horizons</strong>
+      <div class="p-4 border border-line space-y-2">
+        <strong class="text-ink text-sm block font-serif font-medium">Synthetic Yeast Horizons</strong>
         <p>Breakthroughs from the Sc2.0 synthetic yeast consortium in replacing 16-chromosome eukaryotic blueprints open doors for near-perfect <em>b&uacute;bod</em> fermentation recipes that elevate local food microbiology globally.</p>
       </div>
     </div>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-7 reveal-group">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-    <div class="spec-card p-6 mt-3">
-      <span class="spec-tab">ONCO-IMMUNOLOGY</span>
+    <div class="card p-6">
+      <span class="text-[11px] tracking-wide uppercase text-muted">Onco-Immunology</span>
       <h4 class="font-serif font-medium text-ink text-base mt-3">Bacterial Extracellular Vesicles (BEVs) in Cancer</h4>
       <p class="text-xs text-ink/70 leading-relaxed mt-2">BEVs carry cytoplasmic cargo (DNA, RNA, virulence factors) that can cross blood&ndash;brain barriers and modulate tumors. Recombinant BEVs generated via genetic engineering hold promise as personalized cancer vaccines and non-invasive microbiome therapies.</p>
     </div>
 
-    <div class="spec-card p-6 mt-3">
-      <span class="spec-tab">BIOELECTRONICS</span>
+    <div class="card p-6">
+      <span class="text-[11px] tracking-wide uppercase text-muted">Bioelectronics</span>
       <h4 class="font-serif font-medium text-ink text-base mt-3">VIBES Pill &amp; Mechanoreceptor Stimulation</h4>
       <p class="text-xs text-ink/70 leading-relaxed mt-2">The Vibrating Ingestible BioElectronic Stimulator (VIBES) pill activates gastric mechanoreceptors to induce serotonin release and metabolic responses mimicking full satiety &mdash; a new avenue for metabolic disease control.</p>
     </div>
 
-    <div class="spec-card p-6 mt-3">
-      <span class="spec-tab">IMMUNOTHERAPY</span>
+    <div class="card p-6">
+      <span class="text-[11px] tracking-wide uppercase text-muted">Immunotherapy</span>
       <h4 class="font-serif font-medium text-ink text-base mt-3">PD-1 Blockade (Dostarlimab) in Rectal Cancer</h4>
       <p class="text-xs text-ink/70 leading-relaxed mt-2">Evaluating 100% complete clinical remission rates in mismatch repair-deficient rectal cancer using Dostarlimab &mdash; highlighting the role of gut-microbiome immunomodulation in potentiating small biologics.</p>
     </div>
 
-    <div class="spec-card p-6 mt-3">
-      <span class="spec-tab">BACTERIAL MAGNITUDE</span>
+    <div class="card p-6">
+      <span class="text-[11px] tracking-wide uppercase text-muted">Bacterial Magnitude</span>
       <h4 class="font-serif font-medium text-ink text-base mt-3"><em>Candidatus Thiomargarita magnifica</em></h4>
       <p class="text-xs text-ink/70 leading-relaxed mt-2">Discovery of a centimeter-long megabacterium with compartmentalized DNA and membrane-bound organelles, challenging established limits on bacterial biovolume (by roughly 4,200 times) and cellular complexity.</p>
     </div>
@@ -532,126 +366,102 @@
 </section>
 
 <!-- Volunteering -->
-<section id="volunteering" class="max-w-6xl mx-auto px-6 py-14 relative z-10">
-  <div class="lane-divider mb-10 reveal">
-    <span class="font-mono text-[10px] tracking-[0.2em] uppercase text-safranin whitespace-nowrap">Field Work</span>
+<section id="volunteering" class="max-w-5xl mx-auto px-6 py-16">
+  <div class="divider mb-10">
+    <span class="text-[11px] tracking-[0.2em] uppercase text-muted whitespace-nowrap">Community</span>
     <div class="rail"></div>
-    <h2 class="font-serif text-3xl font-medium text-ink whitespace-nowrap">Volunteering &amp; Community Engagement</h2>
+    <h2 class="font-serif text-2xl font-normal text-ink whitespace-nowrap">Volunteering &amp; Community Engagement</h2>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-7 reveal-group">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-    <div class="spec-card p-6 mt-3">
-      <span class="spec-tab">SEP 2022 &ndash; PRESENT</span>
-      <div class="flex justify-between items-start mt-2">
-        <h3 class="font-serif font-medium text-ink text-base">LoveYourself PH &mdash; Balay Marvi Clinic</h3>
-      </div>
-      <p class="text-xs text-violet font-medium mt-1">Clinic Attendant Volunteer, Baguio City</p>
+    <div class="card p-6">
+      <span class="text-[11px] tracking-wide uppercase text-muted">Sep 2022 &ndash; Present</span>
+      <h3 class="font-serif font-medium text-ink text-base mt-2">LoveYourself PH &mdash; Balay Marvi Clinic</h3>
+      <p class="text-xs text-ink font-medium mt-1">Clinic Attendant Volunteer, Baguio City</p>
       <p class="text-xs text-ink/70 leading-relaxed mt-2">Facilitates HIV self-test kit usage, Pre-Exposure Prophylaxis (PrEP) counseling, patient data sheets, and health guidance.</p>
     </div>
 
-    <div class="spec-card p-6 mt-3">
-      <span class="spec-tab">2021</span>
+    <div class="card p-6">
+      <span class="text-[11px] tracking-wide uppercase text-muted">2021</span>
       <h3 class="font-serif font-medium text-ink text-base mt-2">Ugnayan ng Pahinung&oacute;d Baguio</h3>
-      <p class="text-xs text-violet font-medium mt-1">Psychological First Aid Responder &amp; Science Tutor</p>
+      <p class="text-xs text-ink font-medium mt-1">Psychological First Aid Responder &amp; Science Tutor</p>
       <p class="text-xs text-ink/70 leading-relaxed mt-2">Provided PFA support to stranded UP Baguio students during COVID-19 lockdowns and tutored CAR youth in scientific research fundamentals.</p>
     </div>
 
-    <div class="spec-card p-6 mt-3">
-      <span class="spec-tab">SEP 2020 &ndash; PRESENT</span>
+    <div class="card p-6">
+      <span class="text-[11px] tracking-wide uppercase text-muted">Sep 2020 &ndash; Present</span>
       <h3 class="font-serif font-medium text-ink text-base mt-2">Project Smile Philippines</h3>
-      <p class="text-xs text-violet font-medium mt-1">Officer</p>
+      <p class="text-xs text-ink font-medium mt-1">Officer</p>
       <p class="text-xs text-ink/70 leading-relaxed mt-2">Led &lsquo;Project Ecoshopping&rsquo; fundraising for Camarines Sur farmers (&lsquo;Hapag-Kapwa&rsquo;) and created video materials for telerehabilitation services for children with disabilities.</p>
     </div>
 
-    <div class="spec-card p-6 mt-3">
-      <span class="spec-tab">NOV 2021 &ndash; PRESENT</span>
+    <div class="card p-6">
+      <span class="text-[11px] tracking-wide uppercase text-muted">Nov 2021 &ndash; Present</span>
       <h3 class="font-serif font-medium text-ink text-base mt-2">Kythe Foundation &amp; TheraWee</h3>
-      <p class="text-xs text-violet font-medium mt-1">Technical Assistant &amp; Intern</p>
+      <p class="text-xs text-ink font-medium mt-1">Technical Assistant &amp; Intern</p>
       <p class="text-xs text-ink/70 leading-relaxed mt-2">Technical assistantship for online activities supporting pediatric cancer patients and virtual teletherapy platforms.</p>
     </div>
   </div>
 </section>
 
 <!-- References -->
-<section class="max-w-6xl mx-auto px-6 py-14 relative z-10">
-  <div class="spec-card p-8 sm:p-10 mt-3 reveal">
-    <span class="spec-tab">REFERENCES</span>
-    <h3 class="font-serif text-2xl font-medium text-ink mt-3 mb-6">Academic &amp; Character References</h3>
+<section class="max-w-5xl mx-auto px-6 py-16">
+  <div class="divider mb-10">
+    <span class="text-[11px] tracking-[0.2em] uppercase text-muted whitespace-nowrap">References</span>
+    <div class="rail"></div>
+    <h2 class="font-serif text-2xl font-normal text-ink whitespace-nowrap">Academic &amp; Character References</h2>
+  </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 text-xs">
-      <div class="p-4 bg-paper border border-ink/10">
-        <h4 class="font-medium text-ink">Ourlad Alzeus G. Tantengco, M.D., Ph.D.</h4>
-        <p class="text-violet text-[11px] mt-1">UP College of Medicine</p>
-        <p class="text-ink/55 text-[10px] mt-2">Mentor &amp; PI for 5 systematic review projects commissioned by DOH.</p>
-      </div>
-      <div class="p-4 bg-paper border border-ink/10">
-        <h4 class="font-medium text-ink">Carol Stephanie C. Tan-Lim, M.D., M.Sc.</h4>
-        <p class="text-violet text-[11px] mt-1">UP College of Medicine</p>
-        <p class="text-ink/55 text-[10px] mt-2">Thesis Adviser for Postbiotics NMA research.</p>
-      </div>
-      <div class="p-4 bg-paper border border-ink/10">
-        <h4 class="font-medium text-ink">Ma. Easter Joy V. Sajo, Ph.D.</h4>
-        <p class="text-violet text-[11px] mt-1">UP Baguio, Dept. of Biology</p>
-        <p class="text-ink/55 text-[10px] mt-2">Thesis &amp; Program Advisor in Undergraduate stint; Co-author.</p>
-      </div>
-      <div class="p-4 bg-paper border border-ink/10">
-        <h4 class="font-medium text-ink">Andrei A. Domogo, Ph.D.</h4>
-        <p class="text-violet text-[11px] mt-1">UP Baguio, Dept. of Mathematics</p>
-        <p class="text-ink/55 text-[10px] mt-2">Director &amp; Co-volunteer, Ugnayan ng Pahinung&oacute;d Baguio.</p>
-      </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+    <div class="card p-5">
+      <h4 class="text-ink font-medium">Ourlad Alzeus G. Tantengco, M.D., Ph.D.</h4>
+      <p class="text-muted mt-1">UP College of Medicine</p>
+      <p class="text-ink/55 text-[10px] mt-2">Mentor &amp; PI for 5 systematic review projects commissioned by DOH.</p>
+    </div>
+    <div class="card p-5">
+      <h4 class="text-ink font-medium">Carol Stephanie C. Tan-Lim, M.D., M.Sc.</h4>
+      <p class="text-muted mt-1">UP College of Medicine</p>
+      <p class="text-ink/55 text-[10px] mt-2">Thesis Adviser for Postbiotics NMA research.</p>
+    </div>
+    <div class="card p-5">
+      <h4 class="text-ink font-medium">Ma. Easter Joy V. Sajo, Ph.D.</h4>
+      <p class="text-muted mt-1">UP Baguio, Dept. of Biology</p>
+      <p class="text-ink/55 text-[10px] mt-2">Thesis &amp; Program Advisor in Undergraduate stint; Co-author.</p>
+    </div>
+    <div class="card p-5">
+      <h4 class="text-ink font-medium">Andrei A. Domogo, Ph.D.</h4>
+      <p class="text-muted mt-1">UP Baguio, Dept. of Mathematics</p>
+      <p class="text-ink/55 text-[10px] mt-2">Director &amp; Co-volunteer, Ugnayan ng Pahinung&oacute;d Baguio.</p>
     </div>
   </div>
 </section>
 
-<footer class="border-t border-ink/10 mt-4 relative z-10">
-  <div class="max-w-6xl mx-auto px-6 py-8 text-center text-[11px] font-mono tracking-wider text-ink/45">
-    &copy; 2026 KHIANNE ED MIGUEL P. ORTEZA &mdash; SPECIMEN LOG CLOSED, RESEARCH ONGOING
+<!-- Contact — always last -->
+<section id="contact" class="max-w-5xl mx-auto px-6 py-20">
+  <div class="card p-10 sm:p-14 text-center">
+    <span class="text-[11px] tracking-[0.2em] uppercase text-muted">Get in Touch</span>
+    <h2 class="font-serif text-3xl sm:text-4xl font-normal text-ink mt-3">Let&rsquo;s connect</h2>
+    <p class="text-sm text-muted mt-4 max-w-md mx-auto">Open to research collaborations, opportunities, and conversation.</p>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+      <a href="mailto:khianneorteza22@gmail.com" class="text-ink text-base border-b border-ink/30 hover:border-ink transition pb-0.5">khianneorteza22@gmail.com</a>
+      <span class="hidden sm:inline text-muted">&middot;</span>
+      <a href="tel:+639369074295" class="text-ink text-base border-b border-ink/30 hover:border-ink transition pb-0.5">+63 936 907 4295</a>
+    </div>
+
+    <div class="flex justify-center gap-3 mt-8">
+      <a href="https://www.linkedin.com/in/khianne-ed-miguel" target="_blank" class="border border-line hover:border-ink px-5 py-2.5 text-xs tracking-wide text-ink transition rounded-full">LinkedIn</a>
+      <a href="mailto:khianneorteza22@gmail.com" class="border border-line hover:border-ink px-5 py-2.5 text-xs tracking-wide text-ink transition rounded-full">Email</a>
+    </div>
+  </div>
+</section>
+
+<footer class="border-t border-line">
+  <div class="max-w-5xl mx-auto px-6 py-8 text-center text-[11px] tracking-wide text-muted">
+    &copy; 2026 Khianne Ed Miguel P. Orteza
   </div>
 </footer>
 
-<script>
-  lucide.createIcons();
-
-  // Reveal on scroll
-  const revealEls = document.querySelectorAll('.reveal, .reveal-group');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('is-visible');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-  revealEls.forEach(el => io.observe(el));
-
-  // Scroll progress "gel lane"
-  const band = document.querySelector('#gel-progress .band');
-  const header = document.getElementById('site-header');
-  function onScroll() {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    if (band) band.style.width = pct + '%';
-    if (header) header.classList.toggle('shrunk', scrollTop > 40);
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
-  // Subtle tilt on cards (skip touch devices)
-  const supportsHover = window.matchMedia('(hover: hover)').matches;
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (supportsHover && !reducedMotion) {
-    document.querySelectorAll('.spec-card').forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = `translateY(-3px) rotate(${x * 1.1}deg) perspective(600px) rotateX(${-y * 2.5}deg) rotateY(${x * 2.5}deg)`;
-      });
-      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-    });
-  }
-</script>
 </body>
 </html>
