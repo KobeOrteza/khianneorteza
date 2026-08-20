@@ -3,196 +3,120 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Khianne Ed Miguel P. Orteza | Laboratory Access</title>
+<title>Khianne Ed Miguel P. Orteza</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
   :root{
-    --paper:#F1EAD9; --paper-card:#FBF6EA; --ink:#211D18;
-    --violet:#5B3A8E; --safranin:#B8402F; --amber:#B9821B; --sage:#6E7C60;
+    --bg:#ffffff;
+    --ink:#171717;
+    --muted:#767676;
+    --line: rgba(23,23,23,0.10);
+    --accent: rgba(23,23,23,0.04);
   }
   *{ box-sizing:border-box; }
   html,body{ height:100%; margin:0; }
   body{
-    background-color:var(--paper);
-    background-image:
-      repeating-linear-gradient(to bottom, transparent 0px, transparent 34px, rgba(33,29,24,0.05) 35px),
-      radial-gradient(ellipse at top left, rgba(184,64,47,0.06), transparent 55%),
-      radial-gradient(ellipse at bottom right, rgba(91,58,142,0.07), transparent 55%);
+    background:var(--bg);
     color:var(--ink);
-    font-family:'IBM Plex Mono', monospace;
-    overflow:hidden;
+    font-family:'Inter', sans-serif;
     display:flex; align-items:center; justify-content:center;
-    position:relative;
+    overflow:hidden;
     cursor:pointer;
   }
-  .grain{
-    position:fixed; inset:0; pointer-events:none; opacity:.04;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  .stage{
+    position:relative; z-index:2;
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+    padding:24px;
   }
 
-  /* ---------- Drifting microorganisms ---------- */
-  .bug{ position:absolute; pointer-events:none; will-change:transform;
-    animation: drift var(--dur,10s) ease-in-out infinite;
-    animation-delay: var(--delay,0s);
-  }
-  @keyframes drift{
-    0%,100%{ transform:translate(0,0) rotate(0deg); }
-    50%{ transform:translate(var(--dx,24px), var(--dy,-18px)) rotate(var(--rot,10deg)); }
-  }
-  .bug svg{ display:block; }
-
-  /* ---------- Colony bloom ripples ---------- */
-  .ripple{
-    position:absolute; border-radius:50%; pointer-events:none;
-    border:1px solid rgba(184,64,47,.35);
-    animation: bloom 3.2s cubic-bezier(.16,1,.3,1) forwards;
-  }
-  @keyframes bloom{
-    0%{ width:4px; height:4px; opacity:.7; }
-    100%{ width:220px; height:220px; opacity:0; margin-left:-108px; margin-top:-108px; }
+  .eyebrow{
+    font-size:11px; letter-spacing:.24em; text-transform:uppercase;
+    color:var(--muted); margin-bottom:26px;
+    opacity:0; animation: riseIn .8s cubic-bezier(.16,1,.3,1) .15s forwards;
   }
 
-  /* ---------- Center content ---------- */
-  .stage{ position:relative; z-index:5; display:flex; flex-direction:column; align-items:center; text-align:center; padding:24px; }
+  .ring{
+    width:56px; height:56px; border-radius:50%;
+    border:1px solid var(--line);
+    margin-bottom:34px;
+    opacity:0; animation: riseIn .8s cubic-bezier(.16,1,.3,1) 0s forwards, spin 12s linear 1s infinite;
+  }
+  .ring::before{
+    content:''; display:block; width:6px; height:6px; border-radius:50%;
+    background:var(--ink); margin:6px auto 0;
+  }
+  @keyframes spin{ to{ transform: rotate(360deg); } }
 
-  .eyebrow{ font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--safranin); margin-bottom:22px; opacity:0; animation: riseIn .8s cubic-bezier(.16,1,.3,1) .2s forwards; }
+  h1.title{
+    font-family:'Newsreader', serif; font-weight:400; font-style:normal;
+    font-size:clamp(2.1rem, 6vw, 3.4rem);
+    letter-spacing:-0.01em; line-height:1.12; color:var(--ink);
+    margin:0 0 12px;
+    opacity:0; animation: riseIn .85s cubic-bezier(.16,1,.3,1) .3s forwards;
+  }
+  h1.title em{ font-style:italic; color:var(--muted); }
 
-  /* DNA helix */
-  .helix-wrap{ perspective:700px; margin-bottom: 30px; }
-  .helix{ width:64px; height:150px; position:relative; transform-style:preserve-3d; animation: spinY 5.5s linear infinite; opacity:0; animation: riseIn .8s cubic-bezier(.16,1,.3,1) .05s forwards, spinY 5.5s linear .9s infinite; }
-  .rung{ position:absolute; left:0; width:100%; height:2px; }
-  .rung::before, .rung::after{ content:''; position:absolute; width:7px; height:7px; border-radius:50%; top:-2.5px; }
-  .rung::before{ left:0; background:var(--violet); }
-  .rung::after{ right:0; background:var(--safranin); }
-  .rung i{ position:absolute; left:7px; right:7px; top:0; height:1px; background:rgba(33,29,24,.35); display:block; }
-  @keyframes spinY{ from{ transform:rotateY(0deg); } to{ transform:rotateY(360deg); } }
-
-  h1.title{ font-family:'Fraunces', serif; font-weight:500; font-size:clamp(2.1rem, 6vw, 3.6rem); letter-spacing:-0.01em; line-height:1.05; color:var(--ink); margin:0 0 10px; opacity:0; animation: riseIn .85s cubic-bezier(.16,1,.3,1) .35s forwards; }
-  h1.title em{ font-style:italic; color:var(--violet); }
-
-  .subtitle{ font-size:12.5px; color:rgba(33,29,24,.6); letter-spacing:.04em; margin-bottom:34px; opacity:0; animation: riseIn .8s cubic-bezier(.16,1,.3,1) .5s forwards; }
+  .subtitle{
+    font-size:13px; color:var(--muted); letter-spacing:.02em; margin-bottom:40px;
+    opacity:0; animation: riseIn .8s cubic-bezier(.16,1,.3,1) .45s forwards;
+  }
 
   .enter-btn{
-    position:relative; width:150px; height:150px; border-radius:50%;
-    border:2px dashed rgba(33,29,24,.3);
-    display:flex; align-items:center; justify-content:center;
+    position:relative;
+    padding:15px 38px;
+    border:1px solid var(--ink);
+    border-radius:999px;
     text-decoration:none; color:var(--ink);
-    background:
-      radial-gradient(circle at 32% 30%, rgba(184,64,47,.35) 0%, rgba(184,64,47,.35) 16%, transparent 42%),
-      radial-gradient(circle at 66% 62%, rgba(91,58,142,.3) 0%, rgba(91,58,142,.3) 10%, transparent 36%),
-      var(--paper-card);
-    opacity:0; animation: riseIn .8s cubic-bezier(.16,1,.3,1) .65s forwards, pulse 3.4s ease-in-out 1.5s infinite;
-    transition: transform .4s cubic-bezier(.16,1,.3,1);
+    font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+    background:transparent;
+    opacity:0; animation: riseIn .8s cubic-bezier(.16,1,.3,1) .6s forwards;
+    transition: background .35s cubic-bezier(.16,1,.3,1), color .35s, transform .35s cubic-bezier(.16,1,.3,1);
   }
-  .enter-btn:hover{ transform: scale(1.05); }
-  .enter-btn:active{ transform: scale(.97); }
-  .enter-btn::after{ content:''; position:absolute; inset:9px; border-radius:50%; border:1px solid rgba(33,29,24,.15); }
-  .enter-btn span{ font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; position:relative; z-index:2; }
-  @keyframes pulse{
-    0%,100%{ box-shadow: 0 0 0 0 rgba(184,64,47,.18); }
-    50%{ box-shadow: 0 0 0 14px rgba(184,64,47,0); }
+  .enter-btn:hover{ background:var(--ink); color:#fff; transform: translateY(-1px); }
+  .enter-btn:active{ transform: translateY(0); }
+
+  .hint{
+    margin-top:28px; font-size:10px; letter-spacing:.16em; text-transform:uppercase;
+    color:rgba(23,23,23,0.32);
+    opacity:0; animation: riseIn .8s cubic-bezier(.16,1,.3,1) .75s forwards;
   }
 
-  .hint{ margin-top:26px; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:rgba(33,29,24,.4); opacity:0; animation: riseIn .8s cubic-bezier(.16,1,.3,1) .85s forwards; }
+  @keyframes riseIn{ from{ opacity:0; transform:translateY(14px);} to{ opacity:1; transform:translateY(0);} }
 
-  @keyframes riseIn{ from{ opacity:0; transform:translateY(16px);} to{ opacity:1; transform:translateY(0);} }
-
-  /* Transition-out on click */
   .leaving .stage{ animation: fadeOut .5s ease forwards; }
-  .leaving .bug{ animation-play-state: paused; }
-  @keyframes fadeOut{ to{ opacity:0; transform:scale(.94); } }
-  .flash{ position:fixed; inset:0; background:var(--paper); opacity:0; pointer-events:none; z-index:20; }
+  @keyframes fadeOut{ to{ opacity:0; transform:scale(.96); } }
+  .flash{ position:fixed; inset:0; background:var(--bg); opacity:0; pointer-events:none; z-index:20; }
   .leaving .flash{ animation: flashIn .55s ease forwards .15s; }
   @keyframes flashIn{ to{ opacity:1; } }
 
   @media (prefers-reduced-motion: reduce){
-    .bug, .helix, .enter-btn, .eyebrow, .title, .subtitle, .hint{ animation: none !important; opacity:1 !important; transform:none !important; }
+    .ring, .enter-btn, .eyebrow, .title, .subtitle, .hint{ animation: none !important; opacity:1 !important; transform:none !important; }
   }
 </style>
 </head>
 <body id="body">
 
-<div class="grain"></div>
-<div id="bugfield"></div>
-
 <div class="stage">
-  <span class="eyebrow">Laboratory Access &mdash; Specimen KEMO&ndash;26</span>
+  <span class="eyebrow">Portfolio</span>
 
-  <div class="helix-wrap">
-    <div class="helix" id="helix"></div>
-  </div>
+  <div class="ring"></div>
 
   <h1 class="title">Khianne Ed Miguel<br><em>P. Orteza</em></h1>
-  <p class="subtitle">bioengineering &middot; microbiology &middot; molecular diagnostics</p>
+  <p class="subtitle">Bioengineering &middot; Microbiology &middot; Molecular Diagnostics</p>
 
-  <a href="khianne-orteza-portfolio.html" class="enter-btn" id="enterBtn">
-    <span>Press to<br>Enter</span>
-  </a>
+  <a href="khianne-orteza-portfolio.html" class="enter-btn" id="enterBtn">View Portfolio</a>
 
-  <span class="hint">tap the dish to view the full record</span>
+  <span class="hint">click to continue</span>
 </div>
 
 <div class="flash"></div>
 
 <script>
-  // Build DNA helix rungs
-  const helix = document.getElementById('helix');
-  const rungCount = 12;
-  for (let i = 0; i < rungCount; i++) {
-    const r = document.createElement('div');
-    r.className = 'rung';
-    r.style.top = (i * (100 / (rungCount - 1))) + '%';
-    r.innerHTML = '<i></i>';
-    helix.appendChild(r);
-  }
-
-  // Scatter microorganism SVGs across the viewport
-  const bacillus = (color) => `<svg width="46" height="16" viewBox="0 0 46 16"><rect x="1" y="1" width="44" height="14" rx="7" fill="none" stroke="${color}" stroke-width="1.6" opacity=".55"/><line x1="4" y1="8" x2="-2" y2="4" stroke="${color}" stroke-width="1" opacity=".4"/><line x1="4" y1="8" x2="-2" y2="12" stroke="${color}" stroke-width="1" opacity=".4"/></svg>`;
-  const coccus = (color) => `<svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="none" stroke="${color}" stroke-width="1.6" opacity=".55"/></svg>`;
-  const diplo = (color) => `<svg width="34" height="18" viewBox="0 0 34 18"><circle cx="9" cy="9" r="7" fill="none" stroke="${color}" stroke-width="1.6" opacity=".55"/><circle cx="25" cy="9" r="7" fill="none" stroke="${color}" stroke-width="1.6" opacity=".5"/></svg>`;
-  const spirillum = (color) => `<svg width="52" height="20" viewBox="0 0 52 20"><path d="M1 10 Q7 1 13 10 T25 10 T37 10 T51 10" fill="none" stroke="${color}" stroke-width="1.6" opacity=".5"/></svg>`;
-
-  const palette = ['#5B3A8E', '#B8402F', '#B9821B', '#6E7C60'];
-  const shapes = [bacillus, coccus, diplo, spirillum];
-  const field = document.getElementById('bugfield');
-  const positions = [
-    [6,12],[88,8],[14,80],[92,68],[48,4],[4,50],[76,88],[36,90],[62,20],[20,34],[80,42],[55,72]
-  ];
-
-  positions.forEach((pos, idx) => {
-    const el = document.createElement('div');
-    el.className = 'bug';
-    const shape = shapes[idx % shapes.length];
-    const color = palette[idx % palette.length];
-    el.innerHTML = shape(color);
-    el.style.left = pos[0] + 'vw';
-    el.style.top = pos[1] + 'vh';
-    el.style.setProperty('--dx', (Math.random() * 50 - 25) + 'px');
-    el.style.setProperty('--dy', (Math.random() * 40 - 20) + 'px');
-    el.style.setProperty('--rot', (Math.random() * 20 - 10) + 'deg');
-    el.style.setProperty('--dur', (7 + Math.random() * 8).toFixed(1) + 's');
-    el.style.setProperty('--delay', (Math.random() * 4).toFixed(1) + 's');
-    field.appendChild(el);
-  });
-
-  // Random colony bloom ripples
-  function spawnRipple(){
-    const r = document.createElement('div');
-    r.className = 'ripple';
-    r.style.left = (10 + Math.random() * 80) + 'vw';
-    r.style.top = (10 + Math.random() * 80) + 'vh';
-    r.style.borderColor = Math.random() > .5 ? 'rgba(184,64,47,.3)' : 'rgba(91,58,142,.28)';
-    field.appendChild(r);
-    setTimeout(() => r.remove(), 3300);
-  }
-  setInterval(spawnRipple, 1900);
-  spawnRipple();
-
-  // Click-through transition
   const btn = document.getElementById('enterBtn');
   const body = document.getElementById('body');
   btn.addEventListener('click', function(e){
