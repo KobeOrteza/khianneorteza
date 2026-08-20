@@ -54,6 +54,40 @@
   ::-webkit-scrollbar-thumb:hover { background: rgba(23,23,23,0.32); }
 
   [x-cloak] { display: none !important; }
+
+  /* Prevent any element from forcing horizontal scroll on narrow viewports */
+  html, body { max-width: 100%; overflow-x: hidden; }
+
+  @media (max-width: 640px){
+    .divider{ flex-wrap: wrap; row-gap: 6px; }
+    .divider .rail{ display:none; }
+    .divider span, .divider h2{ white-space: normal !important; }
+    a, button { -webkit-tap-highlight-color: transparent; }
+  }
+
+  /* Anchor targets: don't let the sticky header cover the section title */
+  section[id]{ scroll-margin-top: 84px; }
+
+  /* Comfortable tap targets on touch devices */
+  @media (hover: none){
+    a, button{ min-height: 40px; }
+  }
+
+  /* Scroll reveal */
+  .reveal{
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible{
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1 !important; transform:none !important; transition:none !important; }
+  }
 </style>
 </head>
 <body class="text-ink font-sans antialiased selection:bg-ink selection:text-white relative" x-data="{ mobileMenu: false }">
@@ -72,7 +106,7 @@
       <a href="#contact" class="hover:text-ink transition">Contact</a>
     </nav>
 
-    <button @click="mobileMenu = !mobileMenu" class="md:hidden text-ink text-sm">
+    <button @click="mobileMenu = !mobileMenu" class="md:hidden text-ink text-sm px-2 py-2 -mr-2">
       <span x-show="!mobileMenu">Menu</span>
       <span x-show="mobileMenu" x-cloak>Close</span>
     </button>
@@ -89,7 +123,7 @@
 </header>
 
 <!-- Hero -->
-<section id="about" class="max-w-5xl mx-auto px-6 pt-20 pb-16">
+<section id="about" class="max-w-5xl mx-auto px-6 pt-14 sm:pt-20 pb-16">
   <div class="divider mb-6">
     <span class="text-[11px] tracking-[0.2em] uppercase text-muted whitespace-nowrap">Profile</span>
     <div class="rail"></div>
@@ -104,8 +138,8 @@
       </div>
     </div>
 
-    <div>
-      <h1 class="font-serif text-5xl sm:text-6xl font-normal tracking-tight text-ink leading-[1.08]">
+    <div class="text-center sm:text-left">
+      <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl font-normal tracking-tight text-ink leading-[1.1]">
         Khianne Ed Miguel<br><span class="italic text-muted">P. Orteza</span>
       </h1>
 
@@ -117,12 +151,12 @@
   </div>
 
   <div class="card mt-10 max-w-xl text-sm divide-y divide-line">
-    <div class="flex px-5 py-3 gap-4"><span class="w-28 text-muted shrink-0">Current</span><span class="text-ink">HKUST &middot; MPhil in Bioengineering, Class of 2026</span></div>
-    <div class="flex px-5 py-3 gap-4"><span class="w-28 text-muted shrink-0">Origin</span><span class="text-ink">UP Diliman &middot; B.S. Biology (Microbiology), Magna cum Laude, 2023</span></div>
-    <div class="flex px-5 py-3 gap-4"><span class="w-28 text-muted shrink-0">Location</span><span class="text-ink">Manila, Philippines 1000</span></div>
+    <div class="flex flex-col sm:flex-row px-5 py-3 gap-1 sm:gap-4"><span class="sm:w-28 text-muted shrink-0">Current</span><span class="text-ink">HKUST &middot; MPhil in Bioengineering, Class of 2026</span></div>
+    <div class="flex flex-col sm:flex-row px-5 py-3 gap-1 sm:gap-4"><span class="sm:w-28 text-muted shrink-0">Origin</span><span class="text-ink">UP Diliman &middot; B.S. Biology (Microbiology), Magna cum Laude, 2023</span></div>
+    <div class="flex flex-col sm:flex-row px-5 py-3 gap-1 sm:gap-4"><span class="sm:w-28 text-muted shrink-0">Location</span><span class="text-ink">Manila, Philippines 1000</span></div>
   </div>
 
-  <div class="flex flex-wrap gap-3 pt-8">
+  <div class="flex flex-wrap justify-center sm:justify-start gap-3 pt-8">
     <a href="mailto:khianneorteza22@gmail.com" class="border border-line hover:border-ink px-5 py-2.5 text-xs tracking-wide text-ink transition rounded-full">
       Email
     </a>
@@ -133,7 +167,7 @@
 </section>
 
 <!-- CV -->
-<section id="cv" class="max-w-5xl mx-auto px-6 py-16">
+<section id="cv" class="max-w-5xl mx-auto px-6 py-12 sm:py-16">
   <div class="divider mb-10">
     <span class="text-[11px] tracking-[0.2em] uppercase text-muted whitespace-nowrap">Experience</span>
     <div class="rail"></div>
@@ -273,7 +307,7 @@
 </section>
 
 <!-- Research Focus -->
-<section id="research" class="max-w-5xl mx-auto px-6 py-16">
+<section id="research" class="max-w-5xl mx-auto px-6 py-12 sm:py-16">
   <div class="divider mb-10">
     <span class="text-[11px] tracking-[0.2em] uppercase text-muted whitespace-nowrap">Focus Areas</span>
     <div class="rail"></div>
@@ -309,17 +343,19 @@
 </section>
 
 <!-- Journal Takeaways -->
-<section id="takeaways" class="max-w-5xl mx-auto px-6 py-16">
+<section id="takeaways" class="max-w-5xl mx-auto px-6 py-12 sm:py-16">
   <div class="divider mb-10">
     <span class="text-[11px] tracking-[0.2em] uppercase text-muted whitespace-nowrap">Journal</span>
     <div class="rail"></div>
     <h2 class="font-serif text-2xl font-normal text-ink whitespace-nowrap">Article Takeaways &amp; Essays</h2>
   </div>
 
-  <div class="card p-8 sm:p-10 mb-6">
-    <span class="text-[11px] tracking-wide uppercase text-muted">Feature &mdash; Nov 2023</span>
-    <span class="text-[11px] uppercase tracking-wider text-muted float-right">Ethno-microbiology &amp; Synthetic Biology</span>
-    <h3 class="font-serif text-2xl font-medium text-ink mt-3 clear-both">Microbial Culture in Culture: Tap&euml;y Rice Wine</h3>
+  <div class="card p-6 sm:p-10 mb-6">
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
+      <span class="text-[11px] tracking-wide uppercase text-muted">Feature &mdash; Nov 2023</span>
+      <span class="text-[11px] uppercase tracking-wider text-muted">Ethno-microbiology &amp; Synthetic Biology</span>
+    </div>
+    <h3 class="font-serif text-xl sm:text-2xl font-medium text-ink mt-3">Microbial Culture in Culture: Tap&euml;y Rice Wine</h3>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-xs text-ink/75 leading-relaxed mt-6">
       <div class="p-4 border border-line space-y-2">
@@ -366,7 +402,7 @@
 </section>
 
 <!-- Volunteering -->
-<section id="volunteering" class="max-w-5xl mx-auto px-6 py-16">
+<section id="volunteering" class="max-w-5xl mx-auto px-6 py-12 sm:py-16">
   <div class="divider mb-10">
     <span class="text-[11px] tracking-[0.2em] uppercase text-muted whitespace-nowrap">Community</span>
     <div class="rail"></div>
@@ -406,7 +442,7 @@
 </section>
 
 <!-- References -->
-<section class="max-w-5xl mx-auto px-6 py-16">
+<section class="max-w-5xl mx-auto px-6 py-12 sm:py-16">
   <div class="divider mb-10">
     <span class="text-[11px] tracking-[0.2em] uppercase text-muted whitespace-nowrap">References</span>
     <div class="rail"></div>
@@ -438,13 +474,13 @@
 </section>
 
 <!-- Contact — always last -->
-<section id="contact" class="max-w-5xl mx-auto px-6 py-20">
-  <div class="card p-10 sm:p-14 text-center">
+<section id="contact" class="max-w-5xl mx-auto px-6 py-14 sm:py-20">
+  <div class="card p-8 sm:p-14 text-center">
     <span class="text-[11px] tracking-[0.2em] uppercase text-muted">Get in Touch</span>
     <h2 class="font-serif text-3xl sm:text-4xl font-normal text-ink mt-3">Let&rsquo;s connect</h2>
     <p class="text-sm text-muted mt-4 max-w-md mx-auto">Open to research collaborations, opportunities, and conversation.</p>
 
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-8 break-all sm:break-normal">
       <a href="mailto:khianneorteza22@gmail.com" class="text-ink text-base border-b border-ink/30 hover:border-ink transition pb-0.5">khianneorteza22@gmail.com</a>
       <span class="hidden sm:inline text-muted">&middot;</span>
       <a href="tel:+639369074295" class="text-ink text-base border-b border-ink/30 hover:border-ink transition pb-0.5">+63 936 907 4295</a>
@@ -462,6 +498,52 @@
     &copy; 2026 Khianne Ed Miguel P. Orteza
   </div>
 </footer>
+
+<script>
+  // Scroll-triggered reveal animation, with a gentle stagger for grouped cards.
+  (function(){
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Elements that reveal as a whole block
+    var blocks = document.querySelectorAll('#about > .divider, #about > .flex, #about > .card, #about > .flex.flex-wrap, .divider, footer > div');
+
+    // Card grids: stagger children by their position within each parent
+    var groups = document.querySelectorAll('section .grid, #cv .space-y-4, section .space-y-4');
+    groups.forEach(function(group){
+      var items = group.querySelectorAll(':scope > .card');
+      items.forEach(function(el, i){
+        el.classList.add('reveal');
+        el.style.transitionDelay = reduceMotion ? '0s' : Math.min(i * 70, 280) + 'ms';
+      });
+    });
+
+    // Standalone cards not already covered above
+    document.querySelectorAll('.card:not(.reveal)').forEach(function(el){
+      el.classList.add('reveal');
+    });
+
+    // Section headings / dividers and the hero block
+    document.querySelectorAll('.divider, #about .flex.flex-col, #about .flex.flex-wrap').forEach(function(el){
+      el.classList.add('reveal');
+    });
+
+    if (reduceMotion) {
+      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-visible'); });
+      return;
+    }
+
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+  })();
+</script>
 
 </body>
 </html>
